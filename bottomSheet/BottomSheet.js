@@ -1,29 +1,29 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from "react-native";
 import React, {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
-} from 'react';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+} from "react";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('screen');
+const { height: SCREEN_HEIGHT } = Dimensions.get("screen");
 
-const SheetBottom = forwardRef(({ children }, ref) => {
+const BottomSheet = forwardRef(({ children }, ref) => {
   const translateY = useSharedValue(0);
   const active = useSharedValue(false);
   const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 50;
   const context = useSharedValue({ y: 0 });
 
-  const scrollTo = useCallback(destination => {
-    'worklet';
+  const scrollTo = useCallback((destination) => {
+    "worklet";
     active.value = destination !== 0;
     translateY.value = withSpring(destination, { damping: 50 });
   }, []);
@@ -41,7 +41,7 @@ const SheetBottom = forwardRef(({ children }, ref) => {
     .onStart(() => {
       context.value = { y: translateY.value };
     })
-    .onUpdate(event => {
+    .onUpdate((event) => {
       translateY.value = event.translationY + context.value.y;
       translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y);
     })
@@ -62,7 +62,7 @@ const SheetBottom = forwardRef(({ children }, ref) => {
       translateY.value,
       [MAX_TRANSLATE_Y + 50, MAX_TRANSLATE_Y],
       [25, 5],
-      Extrapolate.CLAMP,
+      Extrapolate.CLAMP
     );
     return {
       borderRadius,
@@ -79,22 +79,22 @@ const SheetBottom = forwardRef(({ children }, ref) => {
   );
 });
 
-export default SheetBottom;
+export default BottomSheet;
 
 const styles = StyleSheet.create({
   bottomSheetContainer: {
-    width: '100%',
+    width: "100%",
     height: SCREEN_HEIGHT,
-    backgroundColor: 'white',
-    position: 'absolute',
+    backgroundColor: "white",
+    position: "absolute",
     top: SCREEN_HEIGHT,
     borderRadius: 25,
   },
   line: {
     width: 75,
     height: 4,
-    backgroundColor: 'grey',
-    alignSelf: 'center',
+    backgroundColor: "grey",
+    alignSelf: "center",
     marginVertical: 15,
     borderRadius: 2,
   },

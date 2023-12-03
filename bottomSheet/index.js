@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React, { useCallback, useRef } from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { TouchableOpacity } from '@gorhom/bottom-sheet';
-import BottomSheet from './SheetBottom';
+import { View, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useCallback, useRef } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import BottomSheet from "./BottomSheet";
 
 const index = () => {
   const ref = useRef(null);
@@ -19,7 +18,7 @@ const index = () => {
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={onPress} />
         <BottomSheet ref={ref}>
-          <View style={{ flex: 1, backgroundColor: 'orange' }} />
+          <View style={{ flex: 1, backgroundColor: "orange" }} />
         </BottomSheet>
       </View>
     </GestureHandlerRootView>
@@ -31,15 +30,15 @@ export default index;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#111',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#111",
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     height: 50,
     borderRadius: 25,
     aspectRatio: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     opacity: 0.6,
   },
 });
